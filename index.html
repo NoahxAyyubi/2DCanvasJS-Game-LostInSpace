@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link
+      href="https://fonts.cdnfonts.com/css/nasalization-2"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <style>
+      /* Style for reset button */
+    body {
+    background-image: url('assets/images/background_single.jpg');
+    
+    background-position: center; /* Center the background image */
+    width: 100%;
+    height: 100%;
+}
+#resetButton {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    padding: 2px;
+    font-size: 12px;
+    z-index: 10;
+}
+
+/* Styles for modal */
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+   
+  
+}
+.modal-content {
+    position: relative;
+    background-image: url('assets/images/Lost In Space.png');
+    width: 540px; /* Set the width to match the image */
+    height: 720px; /* Set the height to match the image */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    text-align: center;
+    border-radius: 20px; /* Round the corners */
+    border: 10px solid grey; /* Add a grey border */
+}
+
+.accept-intercom-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the modal content */
+}
+
+.accept-intercom-btn {
+    display: flex; /* Use flexbox for layout */
+    position: absolute;
+    top: 35%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    padding: 5px 40px;
+    font-size: 13px;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+     border-radius: 10px; /* Round the corners */
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.chat-box {
+    display:none;
+    position: absolute;
+    bottom: 10px; /* Adjust bottom position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f0f0f0; /* Example background color */
+    padding: 13px;
+    border-radius: 5px;
+    border: 3px solid #000;
+    width: 80%; /* Adjust width as needed */
+    
+}
+.start-game-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}/* Adjustments for smaller screens */
+
+.glow-button {
+    border: 2px solid #fff;
+    animation: glow .5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #fff;
+    }
+    to {
+        box-shadow: 0 0 20px red;
+    }
+}@media (max-width: 720px) {
+    .modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+       
+      
+    }
+    .modal-content {
+        position: relative;
+        background-image: url('assets/images/mobile.png');
+        width: 379px; /* Set the width to match the image */
+        height: 535px; /* Set the height to match the image */
+        overflow: hidden; /* Ensure content doesn't overflow */
+        text-align: center;
+        border-radius: 15px; /* Round the corners */
+        border: 5px solid grey; /* Add a grey border */
+    }
+    
+    .accept-intercom-btn img {
+        width: 60%;
+    }
+    
+    .accept-intercom-btn {
+        display: flex; /* Use flexbox for layout */
+        position: absolute;
+        top: 28%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+        padding: 5px 30px;
+        font-size: 15px;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+         border-radius: 10px; /* Round the corners */
+        align-items: center;
+        justify-content: center;
+       
+    }
+    
+    .chat-box {
+        display:none;
+        position: absolute;
+        bottom: 10px; /* Adjust bottom position as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f0f0f0; /* Example background color */
+        padding: 10px;
+        border-radius: 5px;
+       border: 3px #000;
+        width: 80%; /* Adjust width as needed */
+    }
+    
+    .start-game-btn {
+        margin-top: 3px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }/* Adjustments for smaller screens */
+    
+    .glow-button {
+        border: 2px solid #fff;
+        animation: glow .5s infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            box-shadow: 0 0 5px #fff;
+        }
+        to {
+            box-shadow: 0 0 20px red;
+        }
+    }
+    
+}
+@media (max-height: 430px) {
+    .modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+       
+      
+    }
+    .modal-content {
+        position: relative;
+        background-image: url('assets/images/landscape.png');
+        width: 540px; /* Set the width to match the image */
+        height: 430px; /* Set the height to match the image */
+        overflow: hidden; /* Ensure content doesn't overflow */
+        text-align: center;
+        border-radius: 15px; /* Round the corners */
+        border: 5px solid grey; /* Add a grey border */
+    }
+    
+    .accept-intercom-btn img {
+        width: 50%;
+       
+        
+    }
+    
+    .accept-intercom-btn {
+        display: flex; /* Use flexbox for layout */
+        position: absolute;
+        top: 40%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+        padding: 10px 20px;
+        font-size: 15px;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+         border-radius: 10px; /* Round the corners */
+        align-items: center;
+        justify-content: center;
+       
+    }
+    
+    .chat-box {
+        display:none;
+        position: absolute;
+        bottom: 10px; /* Adjust bottom position as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f0f0f0; /* Example background color */
+        padding: 10px;
+        border-radius: 5px;
+       border: 3px #000;
+        width: 80%; /* Adjust width as needed */
+    }
+    .start-game-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }/* Adjustments for smaller screens */
+    
+    .glow-button {
+        border: 2px solid #fff;
+        animation: glow .5s infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            box-shadow: 0 0 5px #fff;
+        }
+        to {
+            box-shadow: 0 0 20px red;
+        }
+    }
+    
+}
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas1"></canvas>
+    <button id="resetButton">Reset</button>
+
+    <!-- Game Prompt Modal -->
+    <div id="gamePrompt" class="modal">
+        <div class="modal-content">
+            <button id="acceptIntercom" class="accept-intercom-btn glow-button">
+                Accept Intercom
+                <img src="assets/images/WalkieTalkie.png" alt="" class="icon">
+            </button>
+            <div class="chat-box">
+                <p class="roboto-mono-normal">Captain Noah broadcasting from Command Base Alpha on Mars.
+                    We're in a shit situation, pilot. A magnetic storm is causing doomsday with
+                    asteroid trajectories. Navigate the spaceship A-S-A-P. Get us out GYADAMMIT!<br>
+                    <br>
+                    <em>Instructions</em><br>
+                    •Rotate screen for better experience<br>
+                    •Swipe right for energy blast<br>
+                    •Tap for small thrusters<br>
+                    <em>Coming Soon</em><br>
+                    •Missle launchers<br>
+                    •Crash explosions<br>
+                    •High Score database
+                </p><br>
+                <input type="text" id="playerNameInput" placeholder="Enter your name">
+                <button id="startGame" class="start-game-btn">Start Mission</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game assets -->
+    <div class="assets">
+      <img id="background" src="assets/images/background_single.jpg" />
+      <img id="SpaceShip" src="assets/images/SpaceShip.png" />
+      <img id="asteroids" src="assets/images/asteroids.png" />
+      <img
+        id="blast"
+        src="assets/images/RedEffectBulletImpactExplosion32x32.png"
+      />
+      <img id="blast2" src="assets/images/BlueEffectBullet.png" />
+      <img id="blast3" src="assets/images/BlueEffect.png" />
+      <audio
+        id="blastSound"
+        src="assets/sounds/355337MissileShot1LightVersion (mp3cut.net).wav"
+      ></audio>
+      <audio
+        id="blastSound2"
+        src="assets/sounds/411797RoboticLifeformEnergyWarDroid_BlasterB02 (mp3cut.net).wav"
+      ></audio>
+      <audio
+        id="backgroundMusic"
+        src="assets/sounds/gameaudioInterstellar.mp3"
+      ></audio>
+      <audio
+        id="crash"
+        src="assets/sounds/whoosh-hit-163595 (mp3cut.net).mp3"
+      ></audio>
+      <audio
+        id="gameIntro"
+        src="assets/sounds/gameaudioIntro.mp3"
+      ></audio>
+      <audio
+        id="winning"
+        src="assets/sounds/hell yeah.MP3"
+      ></audio>
+      <audio
+        id="losing"
+        src="assets/sounds/ohhellnaw.mp3"
+      ></audio>
+    </div>
+
+    <script src="./assets/scripts/audio.js"></script>
+    <script src="./assets/scripts/background.js"></script>
+    <script src="./assets/scripts/player.js"></script>
+    <script src="./assets/scripts/obstacle.js"></script>
+    <script src="./assets/scripts/main.js"></script>
+    <script>
+        // JavaScript to handle interaction with acceptIntercom button
+        const acceptIntercomBtn = document.getElementById('acceptIntercom');
+        const chatBox = document.querySelector('.chat-box');
+        const playerNameInput = document.getElementById('playerNameInput');
+        let playerName = '';
+
+        // Event listener to track input field changes
+        playerNameInput.addEventListener('input', function() {
+            playerName = playerNameInput.value;
+        });
+        acceptIntercomBtn.addEventListener('click', function() {
+    if (chatBox.style.display === '' || chatBox.style.display === 'none') {
+        chatBox.style.display = 'block';
+    } else {
+        chatBox.style.display = 'none';
+    }
+  
+});
+      </script>
+  </body>
+</html>
