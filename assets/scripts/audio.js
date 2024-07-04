@@ -38,15 +38,16 @@ class Audio {
         this.gameIntro.currentTime = 0; // Reset audio to the start
         this.gameIntro.play();
     }
-    // playWinningSound() {
-    //     this.winning.currentTime = 0; // Reset audio to the start
-    //     this.winning.play();
-    //     console.log(`winning music`);
-    // }
-    // playStopWinningSound() {
-    //     this.winning.currentTime = 0; // Reset audio to the start
-    //     this.winning.pausw();
-    // }
+    playWinningSound() {
+         
+        this.winning.currentTime = 0; // Reset audio to the start
+        this.winning.play();
+        console.log(`winning music`);
+    }
+    playStopWinningSound() {
+        this.winning.currentTime = 0; // Reset audio to the start
+        this.winning.pause();
+    }
     // playLosingSound() {
     //     this.losing.currentTime = 0; // Reset audio to the start
     //     this.losing.play();

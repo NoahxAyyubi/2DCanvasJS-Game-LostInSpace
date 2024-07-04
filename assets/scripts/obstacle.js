@@ -7,9 +7,9 @@ class Obstacle {
     this.scaledWidth = this.spriteWidth * this.game.ratio;
     this.y = Math.random() * (this.game.height - this.scaledHeight);
     this.x = x;
-    this.acceleration = 0.0015;  // Acceleration factor
-    this.maxSpeedX = 5;
-    this.speedX = 1 * this.game.ratio < 1 ? 1.2 : 2; // Diagonal speed
+    this.acceleration = 0.003;  // Acceleration factor
+   
+    this.speedX = 2; // Diagonal speed
     this.speedY = Math.random() < 0.5 ? -1 * this.game.ratio : 1 * this.game.ratio;
     this.collisionX;
     this.collisionY;
@@ -24,10 +24,8 @@ class Obstacle {
   update() {
     
     this.speedX += this.acceleration
-    if (this.speedX > this.maxSpeedX) {
-      this.speedX = this.maxSpeedX;
-    }
-    this.x -= this.game.speed * this.speedX; // Diagonal speed
+   
+    this.x -= this.speedX; // Diagonal speed
     this.y += this.speedY;
     this.collisionX = this.x + this.scaledWidth * 0.5;
     this.collisionY = this.y + this.scaledHeight * 0.5;

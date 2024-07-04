@@ -11,14 +11,14 @@ class Game {
         this.message1;
         this.message2;
         this.minSpeed = 1.5;
-        this.maxSpeed = this.minSpeed * 5;
+        this.maxSpeed = this.minSpeed * 6;
         this.touchStartX;
         this.lastTouch;
         this.audio = new Audio();
         this.speed;
         this.gravity;
         this.obstacles = [];
-        this.numberOfObstacles = 20;
+        this.numberOfObstacles = 30;
         this.remainingAsteroids = 0;
         this.remainingAsteroidsSet = false;
         this.gameOver = false;
@@ -127,6 +127,7 @@ class Game {
     this.background.resize();
     this.player.resize();
     this.audio.playBackgroundMusic();
+    this.audio.playStopWinningSound();
    //this.audio.playStopLosingSound();
     this.createObstacles();
     this.obstacles.forEach((obstacle) => {
@@ -206,7 +207,9 @@ class Game {
         this.message1 = "Mission accomplished!";
         this.message2 =
           `Can you do it faster than: ` + this.formatTimer() + ` seconds?`;
-        
+        if (this.message1 ==="Mission accomplished!") { 
+          this.audio.winning.play();
+        }
       }
   
       this.ctx.textAlign = `center`;

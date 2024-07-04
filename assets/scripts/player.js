@@ -71,7 +71,7 @@ class Player {
     update() {
         this.handleEnergy();
         this.y += this.speedY;
-        this.collisionY = this.y + this.height * 0.46;
+        this.collisionY = this.y + this.height * 0.5;
         if (this.y < this.game.height - this.height && !this.charging) {
             this.speedY = this.speedY + this.game.gravity;
         } else {
@@ -120,7 +120,7 @@ class Player {
     handleEnergy() {
         // Increase energy over time up to maxEnergy
         if (this.energy < this.maxEnergy) {
-            this.energy += 0.03;
+            this.energy += 0.06;
         }
 
         // Decrease energy rapidly when charging
