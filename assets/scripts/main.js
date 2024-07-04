@@ -18,14 +18,14 @@ class Game {
         this.speed;
         this.gravity;
         this.obstacles = [];
-        this.numberOfObstacles = 40;
+        this.numberOfObstacles = 20;
         this.remainingAsteroids = 0;
         this.remainingAsteroidsSet = false;
         this.gameOver = false;
         this.time = 0;
-        this.eventTimer = 0;
-        this.eventInterval = 100;
-        this.eventUpdate = false;
+        // this.eventTimer = 0;
+        // this.eventInterval = 100;
+        // this.eventUpdate = false;
         this.playerName = playerName;
         
 
@@ -34,7 +34,7 @@ class Game {
         // Define the event listener functions
         
         this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
+        //this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleTouchStart = this.handleTouchStart.bind(this);
         this.handleTouchMove = this.handleTouchMove.bind(this);
         this.handleResize = this.handleResize.bind(this);
@@ -42,7 +42,7 @@ class Game {
         // Add event listeners
        
         this.canvas.addEventListener("mousedown", this.handleMouseDown);
-        window.addEventListener("keydown", this.handleKeyDown);
+        //window.addEventListener("keydown", this.handleKeyDown);
         this.canvas.addEventListener("touchstart", this.handleTouchStart);
         this.canvas.addEventListener("touchmove", this.handleTouchMove);
         window.addEventListener("resize", this.handleResize);
@@ -59,18 +59,18 @@ class Game {
         this.player.flap();
     }
 
-    handleKeyDown(e) {
-        if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
-            this.player.flap();
-        } else if (e.key === "Shift" && this.player.energy > 3) {
-            this.player.startCharge();
-        } else if (e.key === "d" || e.key === "D") {
-            this.debug = !this.debug; // Toggle debug mode
-        } else if (e.key === "r" || e.key === "R") {
-            this.resetGame();
-        }
-    }
+    // handleKeyDown(e) {
+    //     if (e.key === " " || e.key === "Enter") {
+    //         e.preventDefault();
+    //         this.player.flap();
+    //     } else if (e.key === "Shift" && this.player.energy > 3) {
+    //         this.player.startCharge();
+    //     } else if (e.key === "d" || e.key === "D") {
+    //         this.debug = !this.debug; // Toggle debug mode
+    //     } else if (e.key === "r" || e.key === "R") {
+    //         this.resetGame();
+    //     }
+    //}
 
     handleTouchStart(e) {
         this.player.flap();
@@ -103,7 +103,7 @@ class Game {
     setupEventListeners() {
         window.addEventListener("resize", this.handleResize);
         this.canvas.addEventListener("mousedown", this.handleMouseDown);
-        window.addEventListener("keydown", this.handleKeyDown);
+        //window.addEventListener("keydown", this.handleKeyDown);
         this.canvas.addEventListener("touchstart", this.handleTouchStart);
         this.canvas.addEventListener("touchmove", this.handleTouchMove);
     }
@@ -127,19 +127,19 @@ class Game {
     this.background.resize();
     this.player.resize();
     this.audio.playBackgroundMusic();
-    this.audio.playStopLosingSound();
+   //this.audio.playStopLosingSound();
     this.createObstacles();
     this.obstacles.forEach((obstacle) => {
         obstacle.resize(); 
  });
 
-    this.scaleResetButton(); // Call function to scale reset button on resize
+    // Call function to scale reset button on resize
   }
 
 
     render(deltaTime) {
 
-    this.handlePeriodicEvents(deltaTime);
+    //this.handlePeriodicEvents(deltaTime);
     if (!this.gameOver) this.time += deltaTime;
     this.background.update();
     this.background.draw();
@@ -173,16 +173,17 @@ class Game {
     return (this.time * 0.001).toFixed(1);
   }
 
-  handlePeriodicEvents(deltaTime) {
-    if (this.eventTimer < this.eventInterval) {
-      this.eventTimer += deltaTime;
-      this.eventUpdate = false;
-    } else {
-      this.eventTimer = this.eventTimer % this.eventInterval;
-      this.eventUpdate = true;
-    }
-  }
+  // handlePeriodicEvents(deltaTime) {
+  //   if (this.eventTimer < this.eventInterval) {
+  //     this.eventTimer += deltaTime;
+  //     this.eventUpdate = false;
+  //   } else {
+  //     this.eventTimer = this.eventTimer % this.eventInterval;
+  //     this.eventUpdate = true;
+  //   }
+  // }
 
+  
   drawStatusText() {
     this.ctx.save();
   
@@ -201,9 +202,11 @@ class Game {
         this.message1 = `Getting Rusty`;
         this.message2 = `Collision Time : ` + this.formatTimer() + ` seconds!`;
       } else if (this.obstacles.length <= 0) {
+        
         this.message1 = "Mission accomplished!";
         this.message2 =
           `Can you do it faster than: ` + this.formatTimer() + ` seconds?`;
+        
       }
   
       this.ctx.textAlign = `center`;
@@ -262,15 +265,7 @@ class Game {
   
     this.ctx.restore();
   }
-  scaleResetButton() {
-    const resetButton = document.getElementById("resetButton");
-    let scaleFactor = 1.2; // Adjust scale factor as needed
-    if (window.innerHeight > window.innerWidth) {
-      scaleFactor = 1;
-    }
-    // Apply scaling to the button
-    resetButton.style.transform = `scale(${scaleFactor})`;
-  }
+ 
 }
 
 window.addEventListener("load", function () {
@@ -282,10 +277,11 @@ window.addEventListener("load", function () {
       const ctx = canvas.getContext("2d");
       canvas.width = 720;
       canvas.height = 720;
+     
       playerName = playerNameInput.value;
             
       const game = new Game(canvas, ctx); // Initialize the game
-  
+      
       let lastTime = 0;
       let animationFrameId; // Variable to store animation frame ID
   

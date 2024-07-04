@@ -351,7 +351,7 @@
       ></audio>
       <audio
         id="winning"
-        src="assets/sounds/hell yeah.MP3"
+        src="assets/sounds/ReelAudio-81708 (mp3cut.net).mp3"
       ></audio>
       <audio
         id="losing"
@@ -369,6 +369,7 @@
         const acceptIntercomBtn = document.getElementById('acceptIntercom');
         const chatBox = document.querySelector('.chat-box');
         const playerNameInput = document.getElementById('playerNameInput');
+        const gameIntro = document.getElementById('gameIntro');
         let playerName = '';
 
         // Event listener to track input field changes
@@ -376,6 +377,7 @@
             playerName = playerNameInput.value;
         });
         acceptIntercomBtn.addEventListener('click', function() {
+            gameIntro.play();
     if (chatBox.style.display === '' || chatBox.style.display === 'none') {
         chatBox.style.display = 'block';
     } else {

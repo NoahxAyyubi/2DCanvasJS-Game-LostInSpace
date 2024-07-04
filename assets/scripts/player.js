@@ -50,7 +50,7 @@ class Player {
         this.game.ctx.strokeStyle = 'white';
         this.game.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         if (this.game.debug) {
-            this.game.ctx.strokeRect(this.x, this.y, this.width, this.height);
+
             this.game.ctx.beginPath();
             this.game.ctx.arc(
                 this.collisionX + this.collisionRadius,
@@ -103,21 +103,37 @@ class Player {
         return this.y <= 0;
     }
 
+    // handleEnergy() {
+    //     if (this.game.eventUpdate) {
+    //         if (this.energy < this.maxEnergy) {
+    //             this.energy += .7;
+    //         }
+    //         if (this.charging) {
+    //             this.energy -= 5;
+    //         }
+    //         if (this.energy <= 0) {
+    //             this.energy = 0;
+    //             this.stopCharge();
+    //         }
+    //     }
+    // }
     handleEnergy() {
-        if (this.game.eventUpdate) {
-            if (this.energy < this.maxEnergy) {
-                this.energy += .7;
-            }
-            if (this.charging) {
-                this.energy -= 5;
-            }
-            if (this.energy <= 0) {
-                this.energy = 0;
-                this.stopCharge();
-            }
+        // Increase energy over time up to maxEnergy
+        if (this.energy < this.maxEnergy) {
+            this.energy += 0.03;
+        }
+
+        // Decrease energy rapidly when charging
+        if (this.charging) {
+            this.energy -= .3;
+        }
+
+        // Ensure energy doesn't drop below zero
+        if (this.energy <= 0) {
+            this.energy = 0;
+            this.stopCharge(); // Stop charging if energy is depleted
         }
     }
-
     flap() {
         this.stopCharge();
         if (!this.isTouchingTop()) {

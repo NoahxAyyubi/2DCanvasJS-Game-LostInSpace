@@ -41,11 +41,13 @@ class Obstacle {
    
 
     if (this.isOffScreen()) {
-      this.markedForDeletion = true;
-      this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
-      console.log(this.game.obstacles.length);
-      //this.game.score++;
+      if (!this.game.gameOver) {
+        this.markedForDeletion = true;
+        this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
+      }
+    
       if (this.game.obstacles.length <= 0) this.game.gameOver = true;
+     
     }
     
     if (this.game.checkCollision(this, this.game.player)) {
@@ -58,7 +60,7 @@ class Obstacle {
       }
       this.game.audio.playExplosionSound();
       this.game.audio.playStopBackgroundMusic();
-      this.game.audio.playLosingSound();
+      //this.game.audio.playLosingSound();
       
     }
     

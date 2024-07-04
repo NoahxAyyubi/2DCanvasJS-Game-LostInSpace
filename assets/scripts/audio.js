@@ -13,7 +13,7 @@ class Audio {
         if (!this.gameOver) {
             this.backgroundMusic.currentTime = 0;
             this.backgroundMusic.play();
-            this.backgroundMusic.loop = true;
+            
         } 
     }
     playStopBackgroundMusic() {
@@ -38,24 +38,24 @@ class Audio {
         this.gameIntro.currentTime = 0; // Reset audio to the start
         this.gameIntro.play();
     }
-    playWinningSound() {
-        this.winning.currentTime = 0; // Reset audio to the start
-        this.winning.play();
-    }
-    playLosingSound() {
-        this.losing.currentTime = 0; // Reset audio to the start
-        this.losing.play();
-    }
-    playStopLosingSound() {
+    // playWinningSound() {
+    //     this.winning.currentTime = 0; // Reset audio to the start
+    //     this.winning.play();
+    //     console.log(`winning music`);
+    // }
+    // playStopWinningSound() {
+    //     this.winning.currentTime = 0; // Reset audio to the start
+    //     this.winning.pausw();
+    // }
+    // playLosingSound() {
+    //     this.losing.currentTime = 0; // Reset audio to the start
+    //     this.losing.play();
+    // }
+    // playStopLosingSound() {
         
-            this.losing.currentTime = 0;
-            this.losing.pause();
-        } 
+    //         this.losing.currentTime = 0;
+    //         this.losing.pause();
+    //     } 
     
-    playStopWinningSound() {
-        if (this.gameOver) {
-            this.losing.currentTime = 0;
-            this.losing.pause();
-        } 
-    }
+    
 }
