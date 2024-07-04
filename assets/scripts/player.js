@@ -120,7 +120,7 @@ class Player {
     handleEnergy() {
         // Increase energy over time up to maxEnergy
         if (this.energy < this.maxEnergy) {
-            this.energy += 0.06;
+            this.energy += 0.1;
         }
 
         // Decrease energy rapidly when charging

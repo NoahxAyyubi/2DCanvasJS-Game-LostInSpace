@@ -11,14 +11,14 @@ class Game {
         this.message1;
         this.message2;
         this.minSpeed = 1.5;
-        this.maxSpeed = this.minSpeed * 6;
+        this.maxSpeed = 10;
         this.touchStartX;
         this.lastTouch;
         this.audio = new Audio();
         this.speed;
         this.gravity;
         this.obstacles = [];
-        this.numberOfObstacles = 30;
+        this.numberOfObstacles = 25;
         this.remainingAsteroids = 0;
         this.remainingAsteroidsSet = false;
         this.gameOver = false;
@@ -72,12 +72,14 @@ class Game {
     //     }
     //}
 
-    handleTouchStart(e) {
+  handleTouchStart(e) {
+    e.preventDefault();
         this.player.flap();
         this.touchStartX = e.changedTouches[0].pageX;
     }
 
-    handleTouchMove(e) {
+  handleTouchMove(e) {
+    e.preventDefault();
         this.lastTouch = e.changedTouches[0].pageX;
         if (e.changedTouches[0].pageX - this.touchStartX > 40) {
             if (this.player.energy > 3) {
@@ -120,6 +122,7 @@ class Game {
     this.ratio = this.height / this.baseHeight;
     this.remainingAsteroidsSet = false;
     this.time = 0;
+    this.startTime = null;
     this.gravity = 0.15 * this.ratio;
     this.speed = Math.max(this.minSpeed, this.minSpeed * this.ratio);
     console.log(`game speed`, this.speed);
@@ -138,10 +141,12 @@ class Game {
   }
 
 
-    render(deltaTime) {
-
+    render() {
+      if (!this.startTime) this.startTime = performance.now(); // Set start time if not already set
+      // Update the time based on the actual elapsed time
+      if (!this.gameOver)this.time = performance.now() - this.startTime;
     //this.handlePeriodicEvents(deltaTime);
-    if (!this.gameOver) this.time += deltaTime;
+    //if (!this.gameOver) this.time += deltaTime;
     this.background.update();
     this.background.draw();
     this.drawStatusText();
@@ -250,7 +255,7 @@ class Game {
       this.ctx.fillText(
         `Take a Screenshot!`,
         this.width * 0.5,
-        this.height * 0.5 +35
+        this.height * 0.5 +40
       );
     }
   
@@ -286,8 +291,8 @@ window.addEventListener("load", function () {
             
       const game = new Game(canvas, ctx); // Initialize the game
       
-      let lastTime = 0;
-      let animationFrameId; // Variable to store animation frame ID
+      //let lastTime = 0;
+      //let animationFrameId; // Variable to store animation frame ID
   
       // function animate(timeStamp) {
       //   const deltaTime = timeStamp - lastTime;
