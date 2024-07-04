@@ -289,14 +289,18 @@ window.addEventListener("load", function () {
       let lastTime = 0;
       let animationFrameId; // Variable to store animation frame ID
   
-      function animate(timeStamp) {
-        const deltaTime = timeStamp - lastTime;
-        lastTime = timeStamp;
+      // function animate(timeStamp) {
+      //   const deltaTime = timeStamp - lastTime;
+      //   lastTime = timeStamp;
+      //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //   game.render(deltaTime);
+      //   animationFrameId = requestAnimationFrame(animate);
+      // }
+      function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        game.render(deltaTime);
-        animationFrameId = requestAnimationFrame(animate);
+        game.render();
+        requestAnimationFrame(gameLoop);
       }
-  
       // Hide the modal
       const gamePrompt = document.getElementById("gamePrompt");
         gamePrompt.style.display = "none";
@@ -305,6 +309,7 @@ window.addEventListener("load", function () {
 
       // Start the game animation loop when button is clicked
       startGameBtn.disabled = true; // Disable the button after clicking to prevent multiple game starts
-      animate(0); // Start animation loop
+      //animate(0); // Start animation loop
+      requestAnimationFrame(gameLoop);
     });
   });
