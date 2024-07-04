@@ -49,21 +49,19 @@ class Obstacle {
      
     }
     
-    if (this.game.checkCollision(this, this.game.player)) {
+    if (this.game.checkCollision(this, this.game.player)&&!this.game.remainingAsteroidsSet) {
       this.game.gameOver = true;
       this.game.player.collided = true;
-      this.game.player.stopCharge();
-      if (!this.game.remainingAsteroidsSet) { // Check if remainingAsteroids has been set
-        this.game.remainingAsteroids = this.game.obstacles.length;
-        this.game.remainingAsteroidsSet = true; // Set the flag to true
-      }
+      this.game.player.stopCharge();}
+      this.game.remainingAsteroids = this.game.obstacles.length;
+      this.game.remainingAsteroidsSet = true; // Set the flag to true
       this.game.audio.playExplosionSound();
       this.game.audio.playStopBackgroundMusic();
       //this.game.audio.playLosingSound();
       
     }
     
-  }
+  
 
   draw() {
     

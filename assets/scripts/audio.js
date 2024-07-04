@@ -1,7 +1,6 @@
 class Audio {
     constructor() {
         this.gameIntro= document.getElementById("gameIntro");
-        this.losing = document.getElementById("losing");
         this.winning = document.getElementById("winning");
         this.blastSound = document.getElementById("blastSound");
         this.blastSound2 = document.getElementById("blastSound2");
@@ -10,12 +9,12 @@ class Audio {
         
     }
     playBackgroundMusic() {
-        if (!this.gameOver) {
+        
             this.backgroundMusic.currentTime = 0;
             this.backgroundMusic.play();
             
         } 
-    }
+    
     playStopBackgroundMusic() {
         if (!this.gameOver) {
             this.backgroundMusic.currentTime = 0;
@@ -48,15 +47,4 @@ class Audio {
         this.winning.currentTime = 0; // Reset audio to the start
         this.winning.pause();
     }
-    // playLosingSound() {
-    //     this.losing.currentTime = 0; // Reset audio to the start
-    //     this.losing.play();
-    // }
-    // playStopLosingSound() {
-        
-    //         this.losing.currentTime = 0;
-    //         this.losing.pause();
-    //     } 
-    
-    
 }
