@@ -14,7 +14,7 @@ class Player {
         this.collisionRadius;
         this.collided = false;
         this.energy = 0;
-        this.maxEnergy = 40;
+        this.maxEnergy = 35;
         this.charging;
         this.image = document.getElementById('SpaceShip');
         this.image2 = document.getElementById('blast');

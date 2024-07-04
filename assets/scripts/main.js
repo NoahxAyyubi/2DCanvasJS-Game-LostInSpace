@@ -255,7 +255,7 @@ class Game {
     for (let i = 0; i < this.player.energy; i++) {
       if (i < 3) {
         this.ctx.fillStyle = "orange";
-      } else if (i < 37) {
+      } else if (i < 33) {
         this.ctx.fillStyle = "blue";
       } else {
         this.ctx.fillStyle = "green"; // Change this to a valid CSS color name or hex code
@@ -278,6 +278,7 @@ window.addEventListener("load", function () {
       canvas.width = 720;
       canvas.height = 720;
      
+      gameIntro.pause();
       playerName = playerNameInput.value;
             
       const game = new Game(canvas, ctx); // Initialize the game
