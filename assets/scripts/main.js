@@ -214,8 +214,9 @@ class Game {
           `Can you do it faster than: ` + this.formatTimer() + ` seconds?`;
         if (this.message1 ==="Mission accomplished!") { 
           this.audio.winning.play();
-          this.gameOver = false;
+         
         }
+        
       }
   
       this.ctx.textAlign = `center`;
