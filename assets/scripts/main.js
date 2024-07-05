@@ -27,7 +27,7 @@ class Game {
         // this.eventInterval = 100;
         // this.eventUpdate = false;
         this.playerName = playerName;
-        this.audio.playBackgroundMusic();
+        
 
         this.resize(window.innerWidth, window.innerHeight);
 
@@ -209,14 +209,15 @@ class Game {
         this.message2 = `Collision Time : ` + this.formatTimer() + ` seconds!`;
       } else if (this.obstacles.length <= 0) {
         
+        this.audio.winning.play();
         this.message1 = "Mission accomplished!";
         this.message2 =
           `Can you do it faster than: ` + this.formatTimer() + ` seconds?`;
-        if (this.message1 ==="Mission accomplished!") { 
-          this.audio.winning.play();
+        // if (this.message1 ==="Mission accomplished!") { 
          
-        }
-        
+         
+        // }
+       
       }
   
       this.ctx.textAlign = `center`;
@@ -334,7 +335,7 @@ window.addEventListener("load", function () {
 
       startGameBtn.disabled = true;
       requestAnimationFrame(gameLoop);
-
+      this.audio.playBackgroundMusic();
       // Lock orientation to landscape
       if (screen.orientation && screen.orientation.lock) {
           screen.orientation.lock("landscape").catch(function(error) {
