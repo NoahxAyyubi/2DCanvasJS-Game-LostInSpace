@@ -38,8 +38,8 @@ class Player {
         this.width = this.spriteWidth * this.game.ratio;
         this.height = this.spriteHeight * this.game.ratio;
         this.y = this.game.height * 0.5 - this.height * 0.5;
-        this.speedY = -5 * this.game.ratio;
-        this.flapSpeed = -5 * this.game.ratio;
+        this.speedY = -4; //* this.game.ratio; get mult by gravity and becoms positive and moves down + faster
+        this.flapSpeed = -4 ;//* this.game.ratio moves up
         this.collisionRadius = this.width * 0.20;
         this.collisionX = this.x + this.width * 0.55;
         this.collided = false;
@@ -47,24 +47,24 @@ class Player {
     }
 
     draw() {
-        this.game.ctx.strokeStyle = 'white';
+        //this.game.ctx.strokeStyle = 'white';
         this.game.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        if (this.game.debug) {
+        // if (this.game.debug) {
 
-            this.game.ctx.beginPath();
-            this.game.ctx.arc(
-                this.collisionX + this.collisionRadius,
-                this.collisionY,
-                this.collisionRadius,
-                0,
-                Math.PI * 2
-            );
-            this.game.ctx.stroke();
-        }
-        if (this.blasting) {
-            this.drawBlast();
-        } else if (this.blasting2) {
+        //     this.game.ctx.beginPath();
+        //     this.game.ctx.arc(
+        //         this.collisionX + this.collisionRadius,
+        //         this.collisionY,
+        //         this.collisionRadius,
+        //         0,
+        //         Math.PI * 2
+        //     );
+        //     this.game.ctx.stroke();
+        // }
+        if (this.blasting2) {
             this.drawSecondBlast();
+        } else if (this.blasting) {
+            this.drawBlast();
         }
     }
 
@@ -87,15 +87,16 @@ class Player {
     }
 
     startCharge() {
+        this.animateBlast2();
         this.charging = true;
         this.game.speed = this.game.maxSpeed;
-        this.animateBlast2();
+       
         this.game.audio.playBlastSound2();
     }
 
     stopCharge() {
         this.charging = false;
-        this.game.speed = Math.max(this.game.minSpeed, this.game.minSpeed * this.game.ratio);
+        this.game.speed = this.game.minSpeed;
         
     }
 
@@ -125,7 +126,7 @@ class Player {
 
         // Decrease energy rapidly when charging
         if (this.charging) {
-            this.energy -= .3;
+            this.energy -= .5;
         }
 
         // Ensure energy doesn't drop below zero
@@ -156,7 +157,7 @@ class Player {
                 clearInterval(this.blastInterval);
                 this.blasting = false; // End blast animation
             }
-        }, 100);
+        }, 150);
     }
 
     animateBlast2() {
@@ -172,7 +173,7 @@ class Player {
                 clearInterval(this.blastInterval2);
                 this.blasting2 = false; // End second blast animation
             }
-        }, 100);
+        }, 200);
     }
 
     drawBlast() {
@@ -181,8 +182,8 @@ class Player {
 
         this.game.ctx.drawImage(
             this.image2,
-            0, // Adjust x coordinate to move to next frame
-            this.frameY * this.blastHeight, // Fixed y coordinate
+            0, // where to crop image from x coorniate 
+            this.frameY * this.blastHeight, //where to crop image from y coorniate * random frame number 
             this.blastWidth,
             this.blastHeight,
             35,
@@ -194,7 +195,7 @@ class Player {
 
     drawSecondBlast() {
         // Draw the second blast animation frames
-        const blastYOffset2 = 70 * this.game.ratio; // Adjust this offset as needed
+        const blastYOffset2 = 78 * this.game.ratio; // Adjust this offset as needed
         const image4XPosition = this.x + this.width;
         this.game.ctx.drawImage(
             this.image3,
@@ -202,10 +203,10 @@ class Player {
             0,
             this.blastWidth,
             this.blastHeight,
-            35,
+            30,
             this.y + blastYOffset2,
-            this.blastWidth * this.game.ratio,
-            this.blastHeight * this.game.ratio
+            this.blastWidth * this.game.ratio+5,
+            this.blastHeight * this.game.ratio+5
         );
         this.game.ctx.drawImage(
             this.image4,
@@ -215,8 +216,8 @@ class Player {
             this.blastHeight,
             image4XPosition,
             this.y + blastYOffset2,
-            this.blastWidth * this.game.ratio,
-            this.blastHeight * this.game.ratio
+            this.blastWidth * this.game.ratio+5,
+            this.blastHeight * this.game.ratio+5
         );
     }
 }

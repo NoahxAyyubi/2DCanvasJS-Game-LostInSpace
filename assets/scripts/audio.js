@@ -1,13 +1,13 @@
 class Audio {
     constructor() {
-        this.gameIntro= document.getElementById("gameIntro");
+       // this.gameIntro= document.getElementById("gameIntro");
         this.winning = document.getElementById("winning");
         this.blastSound = document.getElementById("blastSound");
         this.blastSound2 = document.getElementById("blastSound2");
         this.explosionSound = document.getElementById("crash");
         this.backgroundMusic = document.getElementById("backgroundMusic");
 
-        this.gameIntro.load();
+       // this.gameIntro.load();
         this.winning.load();
         this.blastSound.load();
         this.blastSound2.load();

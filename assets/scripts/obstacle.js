@@ -44,7 +44,7 @@ class Obstacle {
         this.markedForDeletion = true;
         this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
       }
-    
+    console.log(this.game.obstacles.length);
       if (this.game.obstacles.length <= 0) this.game.gameOver = true;
      
     }
@@ -55,7 +55,8 @@ class Obstacle {
       this.game.gameOver = true;
       this.game.player.collided = true;
       this.game.remainingAsteroids = this.game.obstacles.length;
-      this.game.remainingAsteroidsSet = true; // Set the flag to true
+      this.game.remainingAsteroidsSet = true; 
+     // Set the flag to true
       this.game.audio.playStopBackgroundMusic();
     
       //this.game.audio.playLosingSound();
