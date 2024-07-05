@@ -304,7 +304,7 @@ window.addEventListener("load", function () {
           // Device rotated to landscape mode
           rotateScreenPrompt.style.display = "none";
           startGame();
-
+          this.audio.playBackgroundMusic();
           // Lock orientation to landscape
           if (screen.orientation && screen.orientation.lock) {
               screen.orientation.lock("landscape").catch(function(error) {
@@ -315,7 +315,8 @@ window.addEventListener("load", function () {
   }
 
   function startGame() {
-      gameIntro.pause();
+    gameIntro.pause();
+    
       gamePrompt.style.display = "none";
       resetButton.style.display = "block";
       playerName = playerNameInput.value;
@@ -335,7 +336,7 @@ window.addEventListener("load", function () {
 
       startGameBtn.disabled = true;
       requestAnimationFrame(gameLoop);
-      this.audio.playBackgroundMusic();
+      
       // Lock orientation to landscape
       if (screen.orientation && screen.orientation.lock) {
           screen.orientation.lock("landscape").catch(function(error) {
