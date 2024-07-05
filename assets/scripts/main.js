@@ -27,7 +27,7 @@ class Game {
         // this.eventInterval = 100;
         // this.eventUpdate = false;
         this.playerName = playerName;
-       
+        this.audio.playBackgroundMusic();
 
         this.resize(window.innerWidth, window.innerHeight);
 
