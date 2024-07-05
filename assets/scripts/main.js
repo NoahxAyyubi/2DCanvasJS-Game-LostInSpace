@@ -18,7 +18,7 @@ class Game {
         this.speed;
         this.gravity;
         this.obstacles = [];
-        this.numberOfObstacles = 25;
+        this.numberOfObstacles = 20;
         this.remainingAsteroids = 0;
         this.remainingAsteroidsSet = false;
         this.gameOver = false;
@@ -27,7 +27,7 @@ class Game {
         // this.eventInterval = 100;
         // this.eventUpdate = false;
         this.playerName = playerName;
-        
+       
 
         this.resize(window.innerWidth, window.innerHeight);
 

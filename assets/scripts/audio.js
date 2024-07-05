@@ -6,6 +6,13 @@ class Audio {
         this.blastSound2 = document.getElementById("blastSound2");
         this.explosionSound = document.getElementById("crash");
         this.backgroundMusic = document.getElementById("backgroundMusic");
+
+        this.gameIntro.load();
+        this.winning.load();
+        this.blastSound.load();
+        this.blastSound2.load();
+        this.explosionSound.load();
+        this.backgroundMusic.load();
         
     }
     playBackgroundMusic() {
