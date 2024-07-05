@@ -278,68 +278,73 @@ class Game {
 }
 
 window.addEventListener("load", function () {
-    // Event listener for the "Start Game" button
   const startGameBtn = document.getElementById("startGame");
   const rotateScreenPrompt = document.getElementById("rotateScreenPrompt");
   const gamePrompt = document.getElementById("gamePrompt");
   const resetButton = document.getElementById('resetButton');
-  
-  
-  function checkOrientationAndStartGame() {
-    if (window.innerWidth > window.innerHeight) {
-      // Device is in landscape mode
-      rotateScreenPrompt.style.display = "none";
-      startGame();
-    } else {
-      // Device is in portrait mode
-      rotateScreenPrompt.style.display = "flex";
 
-      // Listen for orientation change events
-      window.addEventListener("orientationchange", function () {
-        if (window.innerWidth > window.innerHeight) {
+  function checkOrientationAndStartGame() {
+      if (window.innerWidth > window.innerHeight) {
+          // Device is in landscape mode
+          rotateScreenPrompt.style.display = "none";
+          startGame();
+      } else {
+          // Device is in portrait mode
+          rotateScreenPrompt.style.display = "flex";
+
+          // Listen for orientation change events
+          window.addEventListener("orientationchange", handleOrientationChange);
+      }
+  }
+
+  function handleOrientationChange() {
+      if (window.innerWidth > window.innerHeight) {
           // Device rotated to landscape mode
           rotateScreenPrompt.style.display = "none";
           startGame();
 
-          // Lock orientation to landscape (optional)
-          if (screen.orientation.lock) {
-            screen.orientation.lock("landscape");
+          // Lock orientation to landscape
+          if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock("landscape").catch(function(error) {
+                  console.error("Orientation lock failed: ", error);
+              });
           }
-        }
-      });
-    }
+      }
   }
-  
+
   function startGame() {
-    gameIntro.pause();
-    gamePrompt.style.display = "none";
-    resetButton.style.display = "block";
-    playerName = playerNameInput.value;
-    // Initialize canvas and game only when starting the game
-    const canvas = document.getElementById("canvas1");
-    const ctx = canvas.getContext("2d");
-    canvas.width = 720;
-    canvas.height = 720;
-    
-    const game = new Game(canvas, ctx); 
-   
+      gameIntro.pause();
+      gamePrompt.style.display = "none";
+      resetButton.style.display = "block";
+      playerName = playerNameInput.value;
 
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      game.render();
+      const canvas = document.getElementById("canvas1");
+      const ctx = canvas.getContext("2d");
+      canvas.width = 720;
+      canvas.height = 720;
+
+      const game = new Game(canvas, ctx); 
+
+      function gameLoop() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          game.render();
+          requestAnimationFrame(gameLoop);
+      }
+
+      startGameBtn.disabled = true;
       requestAnimationFrame(gameLoop);
-    }
 
-  
-
-    startGameBtn.disabled = true; // Disable the button after clicking to prevent multiple game starts
-    requestAnimationFrame(gameLoop);
+      // Lock orientation to landscape
+      if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock("landscape").catch(function(error) {
+              console.error("Orientation lock failed: ", error);
+          });
+      }
   }
-  startGameBtn.addEventListener("click", function () {
-    checkOrientationAndStartGame();
-  });
-});
 
+  window.addEventListener("resize", handleOrientationChange);
+  startGameBtn.addEventListener("click", checkOrientationAndStartGame);
+});
 
   //let lastTime = 0;
   //let animationFrameId; // Variable to store animation frame ID
