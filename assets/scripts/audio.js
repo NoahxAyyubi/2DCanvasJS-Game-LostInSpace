@@ -32,6 +32,10 @@ class Audio {
         this.blastSound.currentTime = 0; // Reset audio to the start
         this.blastSound.play();
     }
+    playStopBlastSound() {
+        this.blastSound.currentTime = 0; // Reset audio to the start
+        this.blastSound.pause();
+    }
     playBlastSound2() {
         this.blastSound2.currentTime = 0; // Reset audio to the start
         this.blastSound2.play();

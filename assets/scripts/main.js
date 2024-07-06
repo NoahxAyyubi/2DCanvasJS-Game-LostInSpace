@@ -18,7 +18,7 @@ class Game {
         this.speed;
         this.gravity;
         this.obstacles = [];
-        this.numberOfObstacles = 20;
+        this.numberOfObstacles = 25;
         this.remainingAsteroids = this.obstacles.length;
      
         this.gameOver = false;
@@ -124,7 +124,7 @@ class Game {
     this.time = 0;
     this.startTime = null;
     this.gravity = 0.1;
-    this.speed = Math.max(this.minSpeed, this.minSpeed * this.ratio);
+    this.speed = this.minSpeed;
     console.log(`game speed`, this.speed);
     this.gameOver = false;
     this.background.resize();
@@ -195,7 +195,7 @@ class Game {
   
     this.ctx.fillText(
       `Asteroids Left : ` +
-        (this.gameOver ? this.remainingAsteroids : this.obstacles.length),
+        this.obstacles.length,
       this.width - 10,
       30
     );

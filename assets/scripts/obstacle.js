@@ -37,10 +37,22 @@ class Obstacle {
     } else {
       this.speedY += 0.2;
     }
+    if (this.game.checkCollision(this, this.game.player)) {
+      this.game.gameOver = true;
+      this.game.audio.playExplosionSound();
+      this.game.player.stopCharge();
+      this.game.player.collided = true;
+
+     // Set the flag to true
+      this.game.audio.playStopBackgroundMusic();
+    
+      //this.game.audio.playLosingSound();
+      
+    }
    
 
-    if (this.isOffScreen()) {
-      if (!this.game.gameOver) {
+    if (!this.game.gameOver) {
+      if (this.isOffScreen()) {
         this.markedForDeletion = true;
         this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
         if (this.game.obstacles.length <= 0) this.game.gameOver = true;
@@ -50,17 +62,6 @@ class Obstacle {
      
     }
     
-    if (this.game.checkCollision(this, this.game.player) && !this.game.remainingAsteroidsSet) {
-      this.game.audio.playExplosionSound();
-      this.game.player.stopCharge();
-      this.game.gameOver = true;
-      this.game.player.collided = true;
-     // Set the flag to true
-      this.game.audio.playStopBackgroundMusic();
-    
-      //this.game.audio.playLosingSound();
-      
-    }
   }
   
 

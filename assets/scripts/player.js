@@ -92,6 +92,7 @@ class Player {
         this.game.speed = this.game.maxSpeed;
        
         this.game.audio.playBlastSound2();
+        this.game.audio.playStopBlastSound();
     }
 
     stopCharge() {
