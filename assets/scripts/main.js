@@ -10,15 +10,15 @@ class Game {
         this.background = new BackGround(this);
         this.message1;
         this.message2;
-        this.minSpeed = 1.5;
+        this.minSpeed = 2;
         this.maxSpeed = 10;
         this.touchStartX;
         this.lastTouch;
         this.audio = new Audio();
         this.speed;
-        this.gravity;
+        this.gravity = 0.1;
         this.obstacles = [];
-        this.numberOfObstacles = 25;
+        this.numberOfObstacles = 20;
         this.remainingAsteroids = this.obstacles.length;
      
         this.gameOver = false;
@@ -120,10 +120,9 @@ class Game {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.ratio = this.height / this.baseHeight;
-    this.remainingAsteroidsSet = false;
     this.time = 0;
     this.startTime = null;
-    this.gravity = 0.1;
+    
     this.speed = this.minSpeed;
     console.log(`game speed`, this.speed);
     this.gameOver = false;
@@ -284,7 +283,7 @@ window.addEventListener("load", function () {
   const rotateScreenPrompt = document.getElementById("rotateScreenPrompt");
   const gamePrompt = document.getElementById("gamePrompt");
   const resetButton = document.getElementById('resetButton');
-
+  const startbackgroundMusic = document.getElementById("backgroundMusic");
   function checkOrientationAndStartGame() {
       if (window.innerWidth > window.innerHeight) {
           // Device is in landscape mode
@@ -316,7 +315,7 @@ window.addEventListener("load", function () {
 
   function startGame() {
     gameIntro.pause();
-    
+    startbackgroundMusic.play();
       gamePrompt.style.display = "none";
       resetButton.style.display = "block";
       playerName = playerNameInput.value;
@@ -327,7 +326,7 @@ window.addEventListener("load", function () {
       canvas.height = 720;
 
       const game = new Game(canvas, ctx); 
-
+     
       function gameLoop() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           game.render();
