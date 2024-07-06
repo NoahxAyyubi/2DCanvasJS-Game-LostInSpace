@@ -19,8 +19,8 @@ class Game {
         this.gravity;
         this.obstacles = [];
         this.numberOfObstacles = 20;
-        this.remainingAsteroids = 0;
-        this.remainingAsteroidsSet = false;
+        this.remainingAsteroids = this.obstacles.length;
+     
         this.gameOver = false;
         this.time = 0;
         // this.eventTimer = 0;
@@ -304,7 +304,7 @@ window.addEventListener("load", function () {
           // Device rotated to landscape mode
           rotateScreenPrompt.style.display = "none";
           startGame();
-          this.audio.playBackgroundMusic();
+          
           // Lock orientation to landscape
           if (screen.orientation && screen.orientation.lock) {
               screen.orientation.lock("landscape").catch(function(error) {
