@@ -16,7 +16,7 @@ class Obstacle {
     this.collisionRadius = this.scaledWidth * 0.3;
     this.markedForDeletion = false;
     this.image = document.getElementById(`asteroids`);
-    this.debug = false;
+    this.debug = true;
   
     this.frameX = Math.floor(Math.random() * 4)
   }
@@ -37,16 +37,7 @@ class Obstacle {
     } else {
       this.speedY += 0.2;
     }
-    if (!this.game.gameOver&&this.game.checkCollision(this, this.game.player)) {
-      this.game.gameOver = true;
-      this.game.player.collided = true;
-      this.game.player.stopCharge();
-      this.game.audio.playStopBackgroundMusic();
-      this.game.audio.playExplosionSound();
-    
-      //this.game.audio.playLosingSound();
-      
-    }
+  
    
 
     if (!this.game.gameOver) {
@@ -59,32 +50,45 @@ class Obstacle {
      
      
     }
+    if (!this.game.gameOver && this.game.checkCollision(this, this.game.player)) {
+      this.handleCollision();
+    }
     
   }
-  
+  handleCollision() {
+    if (!this.collided) {
+      this.collided = true;
+      this.game.audio.playExplosionSound();
+      this.game.gameOver = true;
+      this.game.player.collided = true;
+      this.game.player.stopCharge();
+      this.game.audio.playStopBackgroundMusic();
+      // Additional actions you want to perform on collision
+    }
+  }
 
   draw() {
     
     this.game.ctx.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight)
-    // if (this.game.debug) {
+    // if (this.debug) {
     //   this.game.ctx.beginPath();
     //   this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
     //   this.game.ctx.stroke();
-  //  if (this.game.debug) {
-  //     const centerX = this.collisionX;
-  //     const centerY = this.collisionY;
-  //     const radius = this.collisionRadius;
+    //   if (this.debug) {
+    //     const centerX = this.collisionX;
+    //     const centerY = this.collisionY;
+    //     const radius = this.collisionRadius;
 
-  //     this.game.ctx.save(); // Save current context state
-  //     this.game.ctx.beginPath();
-  //     this.game.ctx.strokeStyle = 'red';
-  //     this.game.ctx.lineWidth = 2;
-  //     this.game.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-  //     this.game.ctx.stroke();
-  //     this.game.ctx.restore(); // Restore context state to not affect other drawings
-  //   }  
+    //     this.game.ctx.save(); // Save current context state
+    //     this.game.ctx.beginPath();
+    //     this.game.ctx.strokeStyle = 'red';
+    //     this.game.ctx.lineWidth = 2;
+    //     this.game.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    //     this.game.ctx.stroke();
+    //     this.game.ctx.restore(); // Restore context state to not affect other drawings
+    //   }
+    // }
   }
-  
 
   resize() {
     this.scaledHeight = this.spriteHeight * this.game.ratio;
