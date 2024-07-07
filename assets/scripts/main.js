@@ -10,7 +10,7 @@ class Game {
         this.background = new BackGround(this);
         this.message1;
         this.message2;
-        this.minSpeed = 3;
+        this.minSpeed = 2.5;
         this.maxSpeed = 10;
         this.touchStartX;
         this.lastTouch;
@@ -160,7 +160,7 @@ class Game {
   createObstacles() {
     this.obstacles = [];
     const firstX = this.baseHeight * this.ratio;
-    const obstacleSpacing = 600 * this.ratio;
+    const obstacleSpacing = 800 * this.ratio;
     for (let i = 0; i < this.numberOfObstacles; i++) {
       this.obstacles.push(new Obstacle(this, firstX + i * obstacleSpacing));
     }

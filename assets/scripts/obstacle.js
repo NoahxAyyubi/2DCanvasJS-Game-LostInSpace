@@ -7,7 +7,7 @@ class Obstacle {
     this.scaledWidth = this.spriteWidth * this.game.ratio;
     this.y = Math.random() * (this.game.height - this.scaledHeight);
     this.x = x;
-    this.acceleration = 0.003;  // Acceleration factor
+    this.acceleration = 0.005;  // Acceleration factor
    
     this.speed= 1.5; 
     this.speedY = Math.random() < 0.5 ? -1 * this.game.ratio : 1 * this.game.ratio;
