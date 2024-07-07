@@ -23,15 +23,15 @@ class Audio {
         } 
     
     playStopBackgroundMusic() {
-        if (!this.gameOver) {
+      
             this.backgroundMusic.currentTime = 0;
             this.backgroundMusic.pause();
-        } 
+        
     }
-    playBlastSound() {
-        this.blastSound.currentTime = 0; // Reset audio to the start
-        this.blastSound.play();
-    }
+    // playBlastSound() {
+    //     this.blastSound.currentTime = 0; // Reset audio to the start
+    //     this.blastSound.play();
+    // }
     // playStopBlastSound() {
     //     this.blastSound.currentTime = 0; // Reset audio to the start
     //     this.blastSound.pause();

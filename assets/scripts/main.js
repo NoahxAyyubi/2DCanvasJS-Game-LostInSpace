@@ -1,114 +1,114 @@
 class Game {
-    constructor(canvas, context) {
-        this.canvas = canvas;
-        this.ctx = context;
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
-        this.baseHeight = 720;
-        this.ratio = this.height / this.baseHeight;
-        this.player = new Player(this);
-        this.background = new BackGround(this);
-        this.message1;
-        this.message2;
-        this.minSpeed = 2.5;
-        this.maxSpeed = 9;
-        this.touchStartX;
-        this.lastTouch;
-        this.audio = new Audio();
-        this.speed;
-        this.gravity = 0.15;
-        this.obstacles = [];
-        this.numberOfObstacles = 20;
-        this.remainingAsteroids = this.obstacles.length;
+  constructor(canvas, context) {
+    this.canvas = canvas;
+    this.ctx = context;
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.baseHeight = 720;
+    this.ratio = this.height / this.baseHeight;
+    this.player = new Player(this);
+    this.background = new BackGround(this);
+    this.message1;
+    this.message2;
+    this.minSpeed = 2.5;
+    this.maxSpeed = 9;
+    this.touchStartX;
+    this.lastTouch;
+    this.audio = new Audio();
+    this.speed;
+    this.gravity = 0.15;
+    this.obstacles = [];
+    this.numberOfObstacles = 20;
+    this.remainingAsteroids = this.obstacles.length;
      
-        this.gameOver = false;
-        this.time = 0;
-        // this.eventTimer = 0;
-        // this.eventInterval = 100;
-        // this.eventUpdate = false;
-        this.playerName = playerName;
-      this.audio.playBackgroundMusic();
+    this.gameOver = false;
+    this.time = 0;
+    // this.eventTimer = 0;
+    // this.eventInterval = 100;
+    // this.eventUpdate = false;
+    this.playerName = playerName;
+    this.audio.playBackgroundMusic();
 
-        this.resize(window.innerWidth, window.innerHeight);
+    this.resize(window.innerWidth, window.innerHeight);
 
-        // Define the event listener functions
+    // Define the event listener functions
         
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        //this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleTouchStart = this.handleTouchStart.bind(this);
-        this.handleTouchMove = this.handleTouchMove.bind(this);
-        this.handleResize = this.handleResize.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    //this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleResize = this.handleResize.bind(this);
 
-        // Add event listeners
+    // Add event listeners
        
-        this.canvas.addEventListener("mousedown", this.handleMouseDown);
-        //window.addEventListener("keydown", this.handleKeyDown);
-        this.canvas.addEventListener("touchstart", this.handleTouchStart,{ passive: false });
-        this.canvas.addEventListener("touchmove", this.handleTouchMove,{ passive: false });
-        window.addEventListener("resize", this.handleResize);
-        // Add event listener for the reset button
-        const resetButton = document.getElementById('resetButton');
-        resetButton.addEventListener('click', () => {
-            this.resetGame();
-        });
-    }
-    handleResize() {
-        this.resize(window.innerWidth, window.innerHeight);
-    }
-    handleMouseDown(e) {
-        this.player.flap();
-    }
+    this.canvas.addEventListener("mousedown", this.handleMouseDown);
+    //window.addEventListener("keydown", this.handleKeyDown);
+    this.canvas.addEventListener("touchstart", this.handleTouchStart, { passive: false });
+    this.canvas.addEventListener("touchmove", this.handleTouchMove, { passive: false });
+    window.addEventListener("resize", this.handleResize);
+    // Add event listener for the reset button
+    const resetButton = document.getElementById('resetButton');
+    resetButton.addEventListener('click', () => {
+      this.resetGame();
+    });
+  }
+  handleResize() {
+    this.resize(window.innerWidth, window.innerHeight);
+  }
+  handleMouseDown(e) {
+    this.player.flap();
+  }
 
-    // handleKeyDown(e) {
-    //     if (e.key === " " || e.key === "Enter") {
-    //         e.preventDefault();
-    //         this.player.flap();
-    //     } else if (e.key === "Shift" && this.player.energy > 3) {
-    //         this.player.startCharge();
-    //     } else if (e.key === "d" || e.key === "D") {
-    //         this.debug = !this.debug; // Toggle debug mode
-    //     } else if (e.key === "r" || e.key === "R") {
-    //         this.resetGame();
-    //     }
-    //}
+  // handleKeyDown(e) {
+  //     if (e.key === " " || e.key === "Enter") {
+  //         e.preventDefault();
+  //         this.player.flap();
+  //     } else if (e.key === "Shift" && this.player.energy > 3) {
+  //         this.player.startCharge();
+  //     } else if (e.key === "d" || e.key === "D") {
+  //         this.debug = !this.debug; // Toggle debug mode
+  //     } else if (e.key === "r" || e.key === "R") {
+  //         this.resetGame();
+  //     }
+  //}
 
   handleTouchStart(e) {
     e.preventDefault();
-        this.player.flap();
-        this.touchStartX = e.changedTouches[0].pageX;
-    }
+    this.player.flap();
+    this.touchStartX = e.changedTouches[0].pageX;
+  }
 
   handleTouchMove(e) {
     e.preventDefault();
-        this.lastTouch = e.changedTouches[0].pageX;
-        if (e.changedTouches[0].pageX - this.touchStartX > 35) {
-            if (this.player.energy > 3) {
-                this.player.startCharge();
-            }
-        }
+    this.lastTouch = e.changedTouches[0].pageX;
+    if (e.changedTouches[0].pageX - this.touchStartX > 35) {
+      if (this.player.energy > 3) {
+        this.player.startCharge();
+      }
     }
+  }
 
-    resetGame() {
-        this.clearGameState();
-        this.setupEventListeners();
-        this.resize(window.innerWidth, window.innerHeight);
-    }
+  resetGame() {
+    this.clearGameState();
+    this.setupEventListeners();
+    this.resize(window.innerWidth, window.innerHeight);
+  }
 
-    clearGameState() {
-        window.removeEventListener("resize", this.handleResize);
-        this.canvas.removeEventListener("mousedown", this.handleMouseDown);
-        window.removeEventListener("keydown", this.handleKeyDown);
-        this.canvas.removeEventListener("touchstart", this.handleTouchStart);
-        this.canvas.removeEventListener("touchmove", this.handleTouchMove);
-    }
+  clearGameState() {
+    window.removeEventListener("resize", this.handleResize);
+    this.canvas.removeEventListener("mousedown", this.handleMouseDown);
+    window.removeEventListener("keydown", this.handleKeyDown);
+    this.canvas.removeEventListener("touchstart", this.handleTouchStart);
+    this.canvas.removeEventListener("touchmove", this.handleTouchMove);
+  }
 
-    setupEventListeners() {
-        window.addEventListener("resize", this.handleResize);
-        this.canvas.addEventListener("mousedown", this.handleMouseDown);
-        //window.addEventListener("keydown", this.handleKeyDown);
-        this.canvas.addEventListener("touchstart", this.handleTouchStart,{ passive: false });
-        this.canvas.addEventListener("touchmove", this.handleTouchMove, { passive: false });
-    }
+  setupEventListeners() {
+    window.addEventListener("resize", this.handleResize);
+    this.canvas.addEventListener("mousedown", this.handleMouseDown);
+    //window.addEventListener("keydown", this.handleKeyDown);
+    this.canvas.addEventListener("touchstart", this.handleTouchStart, { passive: false });
+    this.canvas.addEventListener("touchmove", this.handleTouchMove, { passive: false });
+  }
 
 
   resize(width, height) {
@@ -130,20 +130,20 @@ class Game {
     this.player.resize();
     this.audio.playBackgroundMusic();
     this.audio.playStopWinningSound();
-   //this.audio.playStopLosingSound();
+    //this.audio.playStopLosingSound();
     this.createObstacles();
     this.obstacles.forEach((obstacle) => {
-        obstacle.resize(); 
- });
+      obstacle.resize();
+    });
 
     // Call function to scale reset button on resize
   }
 
 
-    render() {
-      if (!this.startTime) this.startTime = performance.now(); // Set start time if not already set
-      // Update the time based on the actual elapsed time
-      if (!this.gameOver)this.time = performance.now() - this.startTime;
+  render() {
+    if (!this.startTime) this.startTime = performance.now(); // Set start time if not already set
+    // Update the time based on the actual elapsed time
+    if (!this.gameOver) this.time = performance.now() - this.startTime;
     //this.handlePeriodicEvents(deltaTime);
     //if (!this.gameOver) this.time += deltaTime;
     this.background.update();
@@ -171,7 +171,14 @@ class Game {
     const sumOfRadii = a.collisionRadius + b.collisionRadius;
     const distanceSquared = dx * dx + dy * dy; // Calculate squared distance
 
-    return distanceSquared <= sumOfRadii * sumOfRadii; // Compare squared distance with squared sum of radii
+    if (distanceSquared <= sumOfRadii * sumOfRadii) {
+      console.log(`Collision detected`);
+      this.audio.playExplosionSound()
+      // Play explosion sound
+      return true;
+    }
+
+    return false;
   }
 
   // checkCollision(a, b) {
