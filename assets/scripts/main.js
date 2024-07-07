@@ -98,8 +98,8 @@ class Game {
         window.removeEventListener("resize", this.handleResize);
         this.canvas.removeEventListener("mousedown", this.handleMouseDown);
         window.removeEventListener("keydown", this.handleKeyDown);
-        this.canvas.removeEventListener("touchstart", this.handleTouchStart);
-        this.canvas.removeEventListener("touchmove", this.handleTouchMove);
+        this.canvas.removeEventListener("touchstart", this.handleTouchStart, { passive: false });
+        this.canvas.removeEventListener("touchmove", this.handleTouchMove, { passive: false });
     }
 
     setupEventListeners() {
@@ -304,12 +304,12 @@ window.addEventListener("load", function () {
           rotateScreenPrompt.style.display = "none";
           startGame();
           
-          // Lock orientation to landscape
-          if (screen.orientation && screen.orientation.lock) {
-              screen.orientation.lock("landscape").catch(function(error) {
-                  console.error("Orientation lock failed: ", error);
-              });
-          }
+          // // Lock orientation to landscape
+          // if (screen.orientation && screen.orientation.lock) {
+          //     screen.orientation.lock("landscape").catch(function(error) {
+          //         console.error("Orientation lock failed: ", error);
+          //    });
+         // }
       }
   }
 
@@ -336,12 +336,7 @@ window.addEventListener("load", function () {
       requestAnimationFrame(gameLoop);
       startGameBtn.disabled = true;
       
-      // Lock orientation to landscape
-      // if (screen.orientation && screen.orientation.lock) {
-      //     screen.orientation.lock("landscape").catch(function(error) {
-      //         console.error("Orientation lock failed: ", error);
-      //     });
-      // }
+     
   }
 
   window.addEventListener("resize", handleOrientationChange);
