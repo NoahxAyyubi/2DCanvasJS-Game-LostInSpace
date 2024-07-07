@@ -285,6 +285,7 @@ window.addEventListener("load", function () {
   const gamePrompt = document.getElementById("gamePrompt");
   const resetButton = document.getElementById('resetButton');
   const startbackgroundMusic = document.getElementById("backgroundMusic");
+  startbackgroundMusic.load(); 
   function checkOrientationAndStartGame() {
       if (window.innerWidth > window.innerHeight) {
           // Device is in landscape mode
@@ -315,30 +316,42 @@ window.addEventListener("load", function () {
   }
 
   function startGame() {
-    gameIntro.pause();
-    startbackgroundMusic.play();
-      gamePrompt.style.display = "none";
-      resetButton.style.display = "block";
-      playerName = playerNameInput.value;
+    try {
+        gameIntro.pause();
+        startbackgroundMusic.play().catch(function(error) {
+            console.error("Background music playback failed: ", error);
+        });
+    } catch (error) {
+        console.error("Error starting game music: ", error);
+    }
 
-      const canvas = document.getElementById("canvas1");
-      const ctx = canvas.getContext("2d");
-      canvas.width = 720;
-      canvas.height = 720;
+    gamePrompt.style.display = "none";
+    resetButton.style.display = "block";
+    playerName = playerNameInput.value;
 
-      const game = new Game(canvas, ctx); 
-     
-      function gameLoop() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          game.render();
-          requestAnimationFrame(gameLoop);
-      }
+    const canvas = document.getElementById("canvas1");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 720;
+    canvas.height = 720;
 
-      requestAnimationFrame(gameLoop);
-      startGameBtn.disabled = true;
-      
-     
-  }
+    const game = new Game(canvas, ctx);
+
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        game.render();
+        requestAnimationFrame(gameLoop);
+    }
+
+    startGameBtn.disabled = true;
+    requestAnimationFrame(gameLoop);
+
+    // Lock orientation to landscape
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(function(error) {
+            console.error("Orientation lock failed: ", error);
+        });
+    }
+}
 
   window.addEventListener("resize", handleOrientationChange);
   startGameBtn.addEventListener("click", checkOrientationAndStartGame);
