@@ -81,7 +81,7 @@ class Game {
   handleTouchMove(e) {
     e.preventDefault();
         this.lastTouch = e.changedTouches[0].pageX;
-        if (e.changedTouches[0].pageX - this.touchStartX > 40) {
+        if (e.changedTouches[0].pageX - this.touchStartX > 35) {
             if (this.player.energy > 3) {
                 this.player.startCharge();
             }
