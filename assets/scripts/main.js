@@ -11,7 +11,7 @@ class Game {
         this.message1;
         this.message2;
         this.minSpeed = 2.5;
-        this.maxSpeed = 10;
+        this.maxSpeed = 9;
         this.touchStartX;
         this.lastTouch;
         this.audio = new Audio();
@@ -160,7 +160,7 @@ class Game {
   createObstacles() {
     this.obstacles = [];
     const firstX = this.baseHeight * this.ratio;
-    const obstacleSpacing = 800 * this.ratio;
+    const obstacleSpacing = 850 * this.ratio;
     for (let i = 0; i < this.numberOfObstacles; i++) {
       this.obstacles.push(new Obstacle(this, firstX + i * obstacleSpacing));
     }
