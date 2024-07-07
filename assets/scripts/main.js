@@ -10,13 +10,13 @@ class Game {
         this.background = new BackGround(this);
         this.message1;
         this.message2;
-        this.minSpeed = 2;
+        this.minSpeed = 3;
         this.maxSpeed = 10;
         this.touchStartX;
         this.lastTouch;
         this.audio = new Audio();
         this.speed;
-        this.gravity = 0.15;
+        this.gravity = 0.08;
         this.obstacles = [];
         this.numberOfObstacles = 20;
         this.remainingAsteroids = this.obstacles.length;

@@ -38,8 +38,8 @@ class Player {
         this.width = this.spriteWidth * this.game.ratio;
         this.height = this.spriteHeight * this.game.ratio;
         this.y = this.game.height * 0.5 - this.height * 0.5;
-        this.speedY = -5; 
-        this.flapSpeed = -6 ;//* this.game.ratio moves up
+        this.speedY = -4; 
+        this.flapSpeed = -4 ;//* this.game.ratio moves up
         this.collisionRadius = this.width * 0.20;
         this.collisionX = this.x + this.width * 0.55;
         this.collided = false;
