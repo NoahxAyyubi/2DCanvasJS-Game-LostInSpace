@@ -165,14 +165,22 @@ class Game {
       this.obstacles.push(new Obstacle(this, firstX + i * obstacleSpacing));
     }
   }
-
   checkCollision(a, b) {
     const dx = a.collisionX - b.collisionX;
     const dy = a.collisionY - b.collisionY;
-    const distance = Math.hypot(dx, dy);
     const sumOfRadii = a.collisionRadius + b.collisionRadius;
-    return distance <= sumOfRadii;
+    const distanceSquared = dx * dx + dy * dy; // Calculate squared distance
+
+    return distanceSquared <= sumOfRadii * sumOfRadii; // Compare squared distance with squared sum of radii
   }
+
+  // checkCollision(a, b) {
+  //   const dx = a.collisionX - b.collisionX;
+  //   const dy = a.collisionY - b.collisionY;
+  //   const distance = Math.hypot(dx, dy);
+  //   const sumOfRadii = a.collisionRadius + b.collisionRadius;
+  //   return distance <= sumOfRadii;
+  // }
 
   formatTimer() {
     return (this.time * 0.001).toFixed(1);
