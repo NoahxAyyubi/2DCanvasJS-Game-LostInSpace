@@ -124,7 +124,7 @@ class Game {
     this.startTime = null;
     
     this.speed = this.minSpeed;
-    console.log(`game speed`, this.speed);
+    //console.log(`game speed`, this.speed);
     this.gameOver = false;
     this.background.resize();
     this.player.resize();
