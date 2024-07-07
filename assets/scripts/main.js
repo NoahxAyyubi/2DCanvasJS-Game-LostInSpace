@@ -106,8 +106,8 @@ class Game {
         window.addEventListener("resize", this.handleResize);
         this.canvas.addEventListener("mousedown", this.handleMouseDown);
         //window.addEventListener("keydown", this.handleKeyDown);
-        this.canvas.addEventListener("touchstart", this.handleTouchStart);
-        this.canvas.addEventListener("touchmove", this.handleTouchMove);
+        this.canvas.addEventListener("touchstart", this.handleTouchStart,{ passive: false });
+        this.canvas.addEventListener("touchmove", this.handleTouchMove, { passive: false });
     }
 
 
