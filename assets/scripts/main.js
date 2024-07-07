@@ -16,7 +16,7 @@ class Game {
         this.lastTouch;
         this.audio = new Audio();
         this.speed;
-        this.gravity = 0.1;
+        this.gravity = 0.15;
         this.obstacles = [];
         this.numberOfObstacles = 20;
         this.remainingAsteroids = this.obstacles.length;
