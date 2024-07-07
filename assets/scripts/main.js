@@ -43,8 +43,8 @@ class Game {
        
         this.canvas.addEventListener("mousedown", this.handleMouseDown);
         //window.addEventListener("keydown", this.handleKeyDown);
-        this.canvas.addEventListener("touchstart", this.handleTouchStart);
-        this.canvas.addEventListener("touchmove", this.handleTouchMove);
+        this.canvas.addEventListener("touchstart", this.handleTouchStart,{ passive: false });
+        this.canvas.addEventListener("touchmove", this.handleTouchMove,{ passive: false });
         window.addEventListener("resize", this.handleResize);
         // Add event listener for the reset button
         const resetButton = document.getElementById('resetButton');
@@ -98,8 +98,8 @@ class Game {
         window.removeEventListener("resize", this.handleResize);
         this.canvas.removeEventListener("mousedown", this.handleMouseDown);
         window.removeEventListener("keydown", this.handleKeyDown);
-        this.canvas.removeEventListener("touchstart", this.handleTouchStart, { passive: false });
-        this.canvas.removeEventListener("touchmove", this.handleTouchMove, { passive: false });
+        this.canvas.removeEventListener("touchstart", this.handleTouchStart);
+        this.canvas.removeEventListener("touchmove", this.handleTouchMove);
     }
 
     setupEventListeners() {
