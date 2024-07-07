@@ -59,7 +59,7 @@ class Obstacle {
   handleCollision() {
     if (  this.game.player.collided = true) {
      
-      this.game.audio.playExplosionSound();
+      
       this.game.gameOver = true;
       
       this.game.player.stopCharge();
