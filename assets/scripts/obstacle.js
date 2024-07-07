@@ -39,12 +39,10 @@ class Obstacle {
     }
     if (!this.game.gameOver&&this.game.checkCollision(this, this.game.player)) {
       this.game.gameOver = true;
-      this.game.audio.playExplosionSound();
-      this.game.player.stopCharge();
       this.game.player.collided = true;
-
-     // Set the flag to true
+      this.game.player.stopCharge();
       this.game.audio.playStopBackgroundMusic();
+      this.game.audio.playExplosionSound();
     
       //this.game.audio.playLosingSound();
       

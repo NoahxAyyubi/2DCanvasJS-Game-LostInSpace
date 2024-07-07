@@ -204,6 +204,7 @@ class Game {
   
     if (this.gameOver) {
       if (this.player.collided) {
+    
         this.message1 = `Getting Rusty`;
         this.message2 = `Collision Time : ` + this.formatTimer() + ` seconds!`;
       } else if (this.obstacles.length <= 0) {
