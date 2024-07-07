@@ -51,16 +51,17 @@ class Obstacle {
      
     }
     if (!this.game.gameOver && this.game.checkCollision(this, this.game.player)) {
+      this.game.player.collided = true;
       this.handleCollision();
     }
     
   }
   handleCollision() {
-    if (!this.collided) {
-      this.collided = true;
+    if (  this.game.player.collided = true) {
+     
       this.game.audio.playExplosionSound();
       this.game.gameOver = true;
-      this.game.player.collided = true;
+      
       this.game.player.stopCharge();
       this.game.audio.playStopBackgroundMusic();
       // Additional actions you want to perform on collision
